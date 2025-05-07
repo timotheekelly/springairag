@@ -10,18 +10,14 @@ import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportRuntimeHints;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.repository.ListCrudRepository;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,33 +47,18 @@ public class MongoApplication {
         }
     }
 
-    @Component
-    static class MongoDbInitializer implements ApplicationRunner {
-
-        private final MongoTemplate template;
-        private final VectorStore vectorStore;
-        private final String collectionName;
-        private final ObjectMapper objectMapper;
-
-        MongoDbInitializer(MongoTemplate template,
-                           VectorStore vectorStore,
-                           @Value("${spring.ai.vectorstore.mongodb.collection-name}") String collectionName, ObjectMapper objectMapper) {
-            this.template = template;
-            this.vectorStore = vectorStore;
-            this.collectionName = collectionName;
-            this.objectMapper = objectMapper;
-        }
-
-
-
-        @Override
-        public void run(ApplicationArguments args) throws Exception {
+    @Bean
+    ApplicationRunner mongoDbInitialzier(MongoTemplate template,
+                                         VectorStore vectorStore,
+                                         @Value("${spring.ai.vectorstore.mongodb.collection-name}") String collectionName,
+                                         ObjectMapper objectMapper) {
+        return args -> {
 
             if (template.collectionExists(collectionName) && template.estimatedCount(collectionName) > 0)
                 return;
 
             var documentData = DOGS_JSON_FILE.getContentAsString(Charset.defaultCharset());
-            var jsonNode = this.objectMapper.readTree(documentData);
+            var jsonNode = objectMapper.readTree(documentData);
             jsonNode.spliterator().forEachRemaining(jsonNode1 -> {
                 var id = jsonNode1.get("id").intValue();
                 var name = jsonNode1.get("name").textValue();
@@ -87,7 +68,7 @@ public class MongoApplication {
                 ));
                 vectorStore.add(List.of(dogument));
             });
-        }
+        };
     }
 
 }
