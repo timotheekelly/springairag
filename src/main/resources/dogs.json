@@ -1,0 +1,164 @@
+[
+  {
+    "id": 97,
+    "name": "Rocky",
+    "description": "A brown Chihuahua known for being protective.",
+    "dob": "2019-01-28",
+    "owner": "",
+    "gender": "m",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/chihuahua-1.png"
+  },
+  {
+    "id": 87,
+    "name": "Bailey",
+    "description": "A tan Dachshund known for being playful.",
+    "dob": "2022-03-22",
+    "owner": "",
+    "gender": "m",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/dachshund-1.png"
+  },
+  {
+    "id": 89,
+    "name": "Charlie",
+    "description": "A black Bulldog known for being curious.",
+    "dob": "2021-08-26",
+    "owner": "",
+    "gender": "m",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/bulldog-1.png"
+  },
+  {
+    "id": 67,
+    "name": "Cooper",
+    "description": "A tan Boxer known for being affectionate.",
+    "dob": "2011-12-22",
+    "owner": "",
+    "gender": "f",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/boxer-1.png"
+  },
+  {
+    "id": 73,
+    "name": "Max",
+    "description": "A brindle Dachshund known for being energetic.",
+    "dob": "2021-12-07",
+    "owner": "",
+    "gender": "m",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/dachshund-1.png"
+  },
+  {
+    "id": 3,
+    "name": "Buddy",
+    "description": "A Poodle known for being calm.",
+    "dob": "2013-10-30",
+    "owner": "",
+    "gender": "m",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/poodle-1.png"
+  },
+  {
+    "id": 93,
+    "name": "Duke",
+    "description": "A white German Shepherd known for being friendly.",
+    "dob": "2017-03-19",
+    "owner": "",
+    "gender": "m",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/german-shepard-2.png"
+  },
+  {
+    "id": 63,
+    "name": "Jasper",
+    "description": "A grey Shih Tzu known for being protective.",
+    "dob": "2016-01-05",
+    "owner": "",
+    "gender": "m",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/shih-tzu-2.png"
+  },
+  {
+    "id": 69,
+    "name": "Toby",
+    "description": "A grey Doberman known for being playful.",
+    "dob": "2008-12-31",
+    "owner": "",
+    "gender": "m",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/doberman-1.png"
+  },
+  {
+    "id": 101,
+    "name": "Nala",
+    "description": "A spotted German Shepherd known for being loyal.",
+    "dob": "2020-07-30",
+    "owner": "",
+    "gender": "f",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/german-shepard-1.png"
+  },
+  {
+    "id": 61,
+    "name": "Penny",
+    "description": "A white Great Dane known for being protective.",
+    "dob": "2014-05-07",
+    "owner": "",
+    "gender": "f",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/great-dane-1.png"
+  },
+  {
+    "id": 1,
+    "name": "Bella",
+    "description": "A golden Poodle known for being calm.",
+    "dob": "2020-01-07",
+    "owner": "",
+    "gender": "f",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/poodle-2.png"
+  },
+  {
+    "id": 91,
+    "name": "Willow",
+    "description": "A brindle Great Dane known for being calm.",
+    "dob": "2011-11-15",
+    "owner": "",
+    "gender": "f",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/great-dane-2.png"
+  },
+  {
+    "id": 5,
+    "name": "Daisy",
+    "description": "A spotted Poodle known for being affectionate.",
+    "dob": "2021-07-31",
+    "owner": "",
+    "gender": "f",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/poodle-1.png"
+  },
+  {
+    "id": 95,
+    "name": "Mia",
+    "description": "A grey Great Dane known for being loyal.",
+    "dob": "2020-11-03",
+    "owner": "",
+    "gender": "f",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/great-dane-2.png"
+  },
+  {
+    "id": 71,
+    "name": "Molly",
+    "description": "A golden Chihuahua known for being curious.",
+    "dob": "2014-03-22",
+    "owner": "",
+    "gender": "f",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/chihuahua-2.png"
+  },
+  {
+    "id": 65,
+    "name": "Ruby",
+    "description": "A white Great Dane known for being protective.",
+    "dob": "2021-11-07",
+    "owner": "",
+    "gender": "f",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/great-dane-3.png"
+  },
+  {
+    "id": 45,
+    "name": "Prancer",
+    "description": "A demonic, neurotic, man hating, animal hating, children hating dogs that look like gremlins.",
+    "dob": "2008-12-19",
+    "owner": "",
+    "gender": "m",
+    "image": "https://raw.githubusercontent.com/joshlong-attic/dog-images/main/prancer.jpg"
+  }
+]
