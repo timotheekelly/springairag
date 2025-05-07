@@ -22,7 +22,7 @@ public class RagServiceDataTest {
     private RagService ragService;
 
     @BeforeEach
-    void seedTestData() throws InterruptedException {
+    void seedTestData() {
         List<Document> documents = List.of(
                 new Document("1", "Spring AI is a Java framework for integrating AI into Spring applications.", Map.of("topic", "Spring")),
                 new Document("2", "MongoDB Atlas Vector Search allows you to perform semantic search over your documents.", Map.of("topic", "MongoDB")),
