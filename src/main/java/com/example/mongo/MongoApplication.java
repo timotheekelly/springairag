@@ -73,7 +73,7 @@ public class MongoApplication {
         @Override
         public void run(ApplicationArguments args) throws Exception {
 
-            if (template.collectionExists(collectionName))
+            if (template.collectionExists(collectionName) && template.estimatedCount(collectionName) > 0)
                 return;
 
             var documentData = DOGS_JSON_FILE.getContentAsString(Charset.defaultCharset());
