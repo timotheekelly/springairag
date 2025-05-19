@@ -2,9 +2,11 @@ package com.example.mongo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
-import org.springframework.ai.chat.memory.InMemoryChatMemory;
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.memory.InMemoryChatMemoryRepository;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.aot.hint.RuntimeHints;
@@ -26,8 +28,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.nio.charset.Charset;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @ImportRuntimeHints(MongoApplication.Hints.class)
 @SpringBootApplication
@@ -53,7 +53,6 @@ public class MongoApplication {
                                          @Value("${spring.ai.vectorstore.mongodb.collection-name}") String collectionName,
                                          ObjectMapper objectMapper) {
         return args -> {
-
             if (template.collectionExists(collectionName) && template.estimatedCount(collectionName) > 0)
                 return;
 
@@ -79,17 +78,19 @@ public class MongoApplication {
 class AdoptionController {
 
     private final ChatClient ai;
-
-    private final Map<String, PromptChatMemoryAdvisor> memory = new ConcurrentHashMap<>();
+    private final InMemoryChatMemoryRepository memoryRepository;
 
     AdoptionController(ChatClient.Builder ai, VectorStore vectorStore) {
         var system = """
-                You are an AI powered assistant to help people adopt a dog from the adoption\s
-                agency named Pooch Palace with locations in Antwerp, Seoul, Tokyo, Singapore, Paris,\s
-                Mumbai, New Delhi, Barcelona, San Francisco, and London. Information about the dogs available\s
-                will be presented below. If there is no information, then return a polite response suggesting we\s
+                You are an AI-powered assistant to help people adopt a dog from the adoption
+                agency named Pooch Palace with locations in Antwerp, Seoul, Tokyo, Singapore, Paris,
+                Mumbai, New Delhi, Barcelona, San Francisco, and London. Information about the dogs available
+                will be presented below. If there is no information, then return a polite response suggesting we
                 don't have any dogs available.
                 """;
+
+        this.memoryRepository = new InMemoryChatMemoryRepository();
+
         this.ai = ai
                 .defaultSystem(system)
                 .defaultAdvisors(new QuestionAnswerAdvisor(vectorStore))
@@ -98,14 +99,23 @@ class AdoptionController {
 
     @GetMapping("/{user}/dogs/assistant")
     String inquire(@PathVariable String user, @RequestParam String question) {
-        var advisor = this.memory
-                .computeIfAbsent(user, _ -> PromptChatMemoryAdvisor.builder(new InMemoryChatMemory()).build());
+
+        var memory = MessageWindowChatMemory.builder()
+                .chatMemoryRepository(memoryRepository)
+                .maxMessages(10)
+                .build();
+
+        var memoryAdvisor = MessageChatMemoryAdvisor.builder(memory).build();
+
         return this.ai
                 .prompt()
                 .user(question)
-                .advisors(advisor)
+                .advisors(a -> a
+                        .advisors(memoryAdvisor)
+                        .param(ChatMemory.CONVERSATION_ID, user)
+                )
                 .call()
                 .content();
     }
-}
 
+}
